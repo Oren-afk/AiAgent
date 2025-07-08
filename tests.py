@@ -1,17 +1,21 @@
-from functions.write_file import write_file
+from functions.run_python import run_python_file
 
 def main():
     print("-----First test")
-    result1 = write_file("calculator", "lorem.txt", "wait, this isn't lorem ipsum")
+    result1 = run_python_file("calculator", "main.py")
     print(result1)
 
     print("\n-----Second test")
-    result2 = write_file("calculator", "pkg/morelorem.txt", "lorem ipsum dolor sit amet")
+    result2 = run_python_file("calculator", "tests.py")
     print(result2)
 
     print("\n-----Third test")
-    result3 = write_file("calculator", "/tmp/temp.txt", "this should not be allowed")
+    result3 = run_python_file("calculator", "../main.py")
     print(result3)
+
+    print("\n-----Forth test")
+    result4 = run_python_file("calculator", "nonexistent.py")
+    print(result4)
 
 if __name__ == "__main__":
     main()
