@@ -1,7 +1,8 @@
 import os
 import sys
 import argparse
-from config import system_prompt, available_functions
+from schemas import available_functions
+from system_prompt import system_prompt
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
