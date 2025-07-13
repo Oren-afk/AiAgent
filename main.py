@@ -3,6 +3,7 @@ import sys
 import argparse
 from schemas import available_functions
 from system_prompt import system_prompt
+from functions.call_function import call_function
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
@@ -32,7 +33,11 @@ def main():
         print(f"Response tokens: {response.usage_metadata.candidates_token_count}")
     if response.function_calls:
         for call in response.function_calls:
-            print(f"Calling function: {call.name}({call.args})")
+            function_response = call_function(call, verbose)
+            if not function_response.parts[0].function_response.response:
+                raise Exception("Something went wrong with the function call.")
+            if verbose:
+                print(f"-> {function_response.parts[0].function_response.response}")
     else:
         print(response.text)
 
